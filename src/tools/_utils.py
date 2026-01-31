@@ -8,13 +8,14 @@ from response import GlyphMCPResponse
 from read_an_asset import read_asset
 
 
-def get_next_number(directory: str, prefix: str) -> int:
+def get_next_number(directory: str, prefix: str, extension: str = ".md") -> int:
     """
     Get the next document number by scanning existing files in a directory.
     
     Args:
         directory: Path to the directory to scan.
         prefix: The file prefix to look for (e.g., 'dl' or 'op').
+        extension: The file extension to filter by (default: '.md'). Use empty string for any extension.
     
     Returns:
         The next available document number.
@@ -23,7 +24,10 @@ def get_next_number(directory: str, prefix: str) -> int:
         return 1
     
     max_number = 0
-    pattern = re.compile(rf'^{prefix}_(\d+)_.*\.md$')
+    if extension:
+        pattern = re.compile(rf'^{prefix}_(\d+)_.*{re.escape(extension)}$')
+    else:
+        pattern = re.compile(rf'^{prefix}_(\d+)_.*')
     
     for filename in os.listdir(directory):
         match = pattern.match(filename)

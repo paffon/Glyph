@@ -39,8 +39,10 @@ The project follows a rigorous design log methodology for all significant featur
 
 ## References
 
-Writing references in a design log is encouraged, in this format:
+Writing references in a design log is encouraged, using standard markdown file references:
 
-- e.g. referencing another design log: `"[ref:dl_123]"` (only use the dl's number, not the full filename)
-- e.g. referencing an artifact: `"[ref:art_123]"` (only use the artifact's name, not the full path)
-- e.g. referencing an operation: `"[ref:op_123]"` (only use the operation's name, not the full path)
+- Referencing another design log: `[dl_123](.assistant/design_logs/dl_123_title.md)` - use the full filename
+- Referencing an artifact: `[art_123](.assistant/artifacts/art_123_name.ext)` - use the full filename with extension
+- Referencing an operation: `[op_123](.assistant/operations/op_123_title.md)` - use the full filename
+
+You can also use descriptive link text: `[See design log about feature X](.assistant/design_logs/dl_123_feature_x.md)`

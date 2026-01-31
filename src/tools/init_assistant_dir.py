@@ -37,7 +37,9 @@ def is_initialized(path: str) -> bool:
 @mcp.tool()
 def init_assistant_dir(root_path: str, overwrite: bool) -> GlyphMCPResponse:
     """
+    User may refer to this tool as `glyph init`.
     Initialize the assistant directory at the given path. Recommended to use at the root of the project.
+    Use this tool to set up the necessary directory structure for Glyph.
     If the directory already exists, please confirm with the user before overwriting.
     
     Args:
@@ -58,7 +60,7 @@ def init_assistant_dir(root_path: str, overwrite: bool) -> GlyphMCPResponse:
             os.rename(existing_dir_name, backup_dir_name)
             response.add_context(f"Existing assistant directory backed up to {backup_dir_name}.")
         else:
-            response.add_context(f"Assistant directory already exists at {os.path.join(root_path, BASE_NAME)}. Set overwrite=True to overwrite.")
+            response.add_context(f"Assistant directory already exists at {os.path.join(root_path, BASE_NAME)}. Set overwrite=True to overwrite. Ask the user 'Looks like Glyph already initialized the assistant directory here. Do you want to overwrite it? Yes/No'")
             return response
 
     design_logs_summary_content = """# Design Logs summary
@@ -67,6 +69,10 @@ This file contains a summary of design logs. Each log is documented by file name
 The main purpose of this file is to provide a quick overview of the design logs for easy reference, without having to read the entire content of each log.
 
 ## Design Logs
+
+"""
+
+    reference_graph_content = """start_point,end_point
 """
 
     dir_structure = [
@@ -82,7 +88,10 @@ The main purpose of this file is to provide a quick overview of the design logs 
                     }
                 ]},
                 {"dir_name": "operations"},
-                {"dir_name": "reference_graphs"}
+                {
+                    "file_name": "reference_graph.csv",
+                    "content": reference_graph_content
+                }
             ]
         }
     ]

@@ -7,7 +7,7 @@ from ._utils import read_asset_with_response
 def get_task_implementation_guidelines() -> GlyphMCPResponse[str]:
     """
     Returns the task planning and implementation guidelines from the assets directory.
-    Use this tool before or when implementing a phase/task to ensure you follow best practices.
+    ALWAYS use this tool when asked to plan/implement a phase/task to ensure you follow best practices.
     Contains essential guidelines on how to approach task implementation effectively.
     
     Returns:

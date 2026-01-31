@@ -6,7 +6,7 @@
 **Related Logs:** [Link to related design logs, if any]
 
 ---
-**Note**: This is a general template, which can be adapted for both research and implementation design logs. Depending on the type, some sections may be omitted or modified. You may also add sections as needed for the specific work.
+**Note**: This is a general template, which can be adapted for both research and implementation design logs. Depending on the type, some sections may be omitted or modified. You may also add sections as needed for the specific work. Remove this comment if not needed anymore.
 ---
 
 ## Background

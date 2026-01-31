@@ -12,9 +12,11 @@ A design log, operation or artifact may refer to any number of other design logs
 
 Reference syntax:
 
-- Referencing a design log: {{ref:dl_1}} (no need to include the log's title or extension)
-- Referencing an operation: {{ref:op_2}} (no need to include the operation's title or extension)
-- Referencing an artifact: {{ref:art_3}} (no need to include the artifact's original filename or extension)
+- Referencing a design log: `[dl_1](.assistant/design_logs/dl_1_title.md)` - use standard markdown file references
+- Referencing an operation: `[op_2](.assistant/operations/op_2_title.md)` - use standard markdown file references
+- Referencing an artifact: `[art_3](.assistant/artifacts/art_3_name.ext)` - use standard markdown file references with extension
+
+You can use descriptive link text: `[See operation about X](.assistant/operations/op_2_title.md)`
 
 ### Design Log
 
