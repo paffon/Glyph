@@ -1,53 +1,98 @@
 import os
-from src.mcp_object import mcp
+from sys import stdout
+from mcp_object import mcp
+from config import BASE_NAME
+from response import GlyphMCPResponse
 
-def create_tree(base_path: str, structure: dict) -> None:
+def create_tree_recursive(base_path: str, structure: dict): 
     """
-    Create a directory tree based on the provided structure dictionary.
+    Recursively create a directory tree based on the provided structure.
     
     Args:
         base_path: The base path where the tree should be created.
-        structure: A dictionary defining the directory structure.
+        structure: A dictionary defining the directory and file structure.
     """
-    dir_name = structure.get("dir_name")
-    contains = structure.get("contains", [])
-    
-    current_path = os.path.join(base_path, dir_name)
-    os.makedirs(current_path, exist_ok=True)
-    
-    for item in contains:
-        if isinstance(item, dict):
-            create_tree(current_path, item)
-        elif isinstance(item, str):
-            file_path = os.path.join(current_path, item)
+    for item in structure.get("contains", []):
+        if "dir_name" in item:
+            dir_path = os.path.join(base_path, item["dir_name"])
+            os.makedirs(dir_path, exist_ok=True)
+            create_tree_recursive(dir_path, item)
+        elif "file_name" in item:
+            file_path = os.path.join(base_path, item["file_name"])
             with open(file_path, 'w', encoding='utf-8') as f:
-                f.write("")  # Create an empty file
+                f.write(item.get("content", ""))
 
-@mcp.tool()
-def init_assistant_dir(p: str) -> bool:
+def is_initialized(path: str) -> bool:
     """
-    Initialize the assistant directory at the given path. Recommended to use at the root of the project.
+    Check if the assistant directory is already initialized at the given path.
     
     Args:
-        p: Path to the assistant directory. Recommended to use at the root of the project.
-        
+        path: The path to check for initialization.
+    Returns:
+        True if initialized, False otherwise.
+    """
+    assistant_dir = os.path.join(path, BASE_NAME)
+    return os.path.exists(assistant_dir)
+
+@mcp.tool()
+def init_assistant_dir(root_path: str, overwrite: bool) -> GlyphMCPResponse:
+    """
+    Initialize the assistant directory at the given path. Recommended to use at the root of the project.
+    If the directory already exists, please confirm with the user before overwriting.
+    
+    Args:
+        root_path: str, Path to the assistant directory. Recommended to use at the root of the project.
+        overwrite: bool, Whether to overwrite the existing directory if it exists. Must only be True if the user has explicitly confirmed or asked for it.
+    
     Returns:
         True if initialization is successful, False otherwise.
     """
-    dir_structure = {
-        "dir_name": ".assistant",
-        "contains": [
-            {"dir_name": "ad_hoc"},
-            {"dir_name": "artifactos"},
-            {"dir_name": "design_logs", "contains": ["summary.md"]},
-            {"dir_name": "operations"},
-            {"dir_name": "reference_graphs"}
-        ]
-    }
+
+    response = GlyphMCPResponse[None]()
+
+    if is_initialized(root_path):
+        if overwrite:
+            # Backup
+            existing_dir_name = os.path.join(root_path, BASE_NAME)
+            backup_dir_name = os.path.join(root_path, f"{BASE_NAME}_backup_{int(os.path.getmtime(existing_dir_name))}")
+            os.rename(existing_dir_name, backup_dir_name)
+            response.add_context(f"Existing assistant directory backed up to {backup_dir_name}.")
+        else:
+            response.add_context(f"Assistant directory already exists at {os.path.join(root_path, BASE_NAME)}. Set overwrite=True to overwrite.")
+            return response
+
+    design_logs_summary_content = """# Design Logs summary
+
+This file contains a summary of design logs. Each log is documented by file name and a brief description.
+The main purpose of this file is to provide a quick overview of the design logs for easy reference, without having to read the entire content of each log.
+
+## Design Logs
+"""
+
+    dir_structure = [
+        {
+            "dir_name": BASE_NAME,
+            "contains": [
+                {"dir_name": "ad_hoc"},
+                {"dir_name": "artifacts"},
+                {"dir_name": "design_logs", "contains": [
+                    {
+                        "file_name": "summary.md",
+                        "content": design_logs_summary_content
+                    }
+                ]},
+                {"dir_name": "operations"},
+                {"dir_name": "reference_graphs"}
+            ]
+        }
+    ]
 
     try:
-        create_tree(p, dir_structure)
-        return True
+        create_tree_recursive(root_path, {"contains": dir_structure})
+        response.success = True
+        response.add_context(f"Assistant directory initialized at {os.path.join(root_path, BASE_NAME)}.")
+
     except Exception as e:
-        print(f"Error initializing assistant directory: {e}")
-        return False
+        response.add_context(f"Failed to initialize assistant directory: {str(e)}")
+    
+    return response
