@@ -1,0 +1,9 @@
+[project]
+name = "glyph-mcp"
+version = "0.1.0"
+description = "Semi-auto tool for coding assistant, use if you're a programmer who wants more control over the tasks and design."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.26.0",
+]
