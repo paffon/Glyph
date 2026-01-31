@@ -4,7 +4,7 @@ The project follows a rigorous design log methodology for all significant featur
 
 ## Before Making Changes
 
-1. **Check design logs** in `.assistant/design-log/summary` for existing designs and implementation notes, then read the relevant logs
+1. **Check design logs** in `.assistant/design_logs/_summary.md` for existing designs and implementation notes, then read the relevant logs
 2. **For new features**: Create design log first, get approval, then implement
 3. **Read related design logs** to understand context and constraints
 
