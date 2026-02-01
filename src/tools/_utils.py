@@ -43,17 +43,15 @@ def sanitize_title(title: str) -> str:
     """
     Sanitize a title for use in a filename.
     
-    Replaces spaces with underscores and removes special characters.
+    Replaces spaces with underscores.
     
     Args:
         title: The title to sanitize.
     
     Returns:
-        The sanitized title in lowercase.
+        The sanitized title.
     """
-    sanitized = re.sub(r'[^\w\s-]', '', title).strip()
-    sanitized = re.sub(r'[-\s]+', '_', sanitized).lower()
-    return sanitized
+    return title.replace(' ', '_')
 
 def add_document(
     base_dir_path: str,

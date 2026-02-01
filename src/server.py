@@ -13,7 +13,7 @@ if __name__ == "__main__":
         from tools.md_to_dict import md_to_dict
         from tools.add_design_log import add_design_log
         from tools.add_operation import add_operation
-        from tools.persist_artifact import persist_artifact
+        from tools.persist_artifact import persist_artifacts
         from tools.reference_graph import update_reference_graph, get_references_from, find_file_references
 
         print("Starting MCP server...")
