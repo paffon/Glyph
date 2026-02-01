@@ -49,4 +49,29 @@ Once a template has been created for an operation using one of the MCP's tools, 
 - Tasks should be as **functionally** atomic as possible.
 - List the files involved in each task.
 - Subtasks should engage with a maximum of 2 files (3 in exceptional cases).
-- At the end of each task- the build must pass and all unit/component tests must be successful.
+- At the end of each task the build must pass and all unit/component tests must be successful.
+- The first subtask of each task should be to review the current code base and determine whether the task is still valid as is, or whether it needs to be adjusted (if adjustments are needed, stop and inform the user).
+- For each actionable task (i.e., tasks that change code), start with a build, run, and test verification to establish a baseline. At the end of the task, perform the same verification to ensure no regressions were introduced.
+- If a task is the last in a phase, ensure to include verification of the phase D.O.D. as a subtask.
+
+### Dynamic Updates
+
+- Document any new tasks identified during implementation.
+- Lessons learned or actions taken during a given phase/task that impact other phases or tasks should be added as a note in the phase/task they impact.
+- If, during implementation of a task, you discover something, learn something, or do something which might be relevant to other tasks/phases, document it in these other tasks/phases as well so it will be seen by whoever implements them next.
+
+### Validation
+
+- Ensure the build passes and all tests (unit and component) are successful after completing each task.
+- Update relevant documentation to reflect changes.
+
+### Checklist Management
+
+- Cross out completed checklist items (subtasks and D.O.D. items).
+- Add new tasks if the D.O.D. checklist is incomplete upon checking.
+
+### General Principles
+
+- Keep descriptions concise and to the point.
+- Avoid unnecessary details that do not contribute to understanding the task.
+- Always keep it simple, don't over engineer, and don't prepare for hypothetical future scenarios that aren't specified in the current requirements.
