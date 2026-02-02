@@ -4,6 +4,7 @@ if __name__ == "__main__":
 
         from prompts.compact_conversation import compact_conversation
 
+        from skills._how_to_glyph import get_how_to_glyph
         from skills.get_dl_example_research import get_dl_example
         from skills.get_dl_rules import get_dl_rules
         from skills.get_operation_rules import get_operation_rules
