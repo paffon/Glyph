@@ -11,7 +11,7 @@ def add_operation(abs_path: str, title: str) -> GlyphMCPResponse[None]:
     Prerequisite: Read the operation rules.
     
     Args:
-        abs_path: The absolute path of the project's root where the .assistant folder is located.
+        abs_path: The absolute path of the project's root where the .assistant folder is located. Absolute path is required.
         title: The title for the operation. The file will be named op_{number}_{title}.md
     
     Returns:

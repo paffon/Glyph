@@ -19,6 +19,13 @@ def validate_absolute_path(abs_path: str, response: GlyphMCPResponse) -> bool:
     Returns:
         True if the path is absolute, False otherwise.
     """
+    if abs_path.startswith(('.', '..')):
+        response.add_context(
+            f"Invalid path: '{abs_path}'. "
+            "The path must be absolute and full (e.g., 'C:\\Users\\...\\project' on Windows or '/home/user/.../project' on Linux/Mac). "
+            "Relative paths (like '.', '..', or 'folder/subfolder') are not allowed."
+        )
+        return False
     if not os.path.isabs(abs_path):
         response.add_context(
             f"Invalid path: '{abs_path}'. "

@@ -96,7 +96,7 @@ def persist_artifacts(abs_path: str, files: List[str]) -> GlyphMCPResponse[None]
     art_{serial_number}_{original_file_name}.{original_extension}
     
     Args:
-        abs_path: The absolute path of the project's root where the .assistant folder is located.
+        abs_path: The absolute path of the project's root where the .assistant folder is located. Absolute path is required.
         files: List of filenames to persist (excluding path, assumed to be in `.assistant/ad_hoc` dir).
     
     Returns:

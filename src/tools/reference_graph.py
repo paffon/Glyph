@@ -221,7 +221,7 @@ def update_reference_graph(abs_path: str) -> GlyphMCPResponse[None]:
     The CSV has two columns: start_point and end_point, representing directed edges in the reference graph.
     
     Args:
-        abs_path: The absolute path of the project's root where the .assistant folder is located.
+        abs_path: The absolute path of the project's root where the .assistant folder is located. Absolute path is required.
     
     Returns:
         GlyphMCPResponse indicating success or failure with statistics.
@@ -327,7 +327,7 @@ def get_references_from(abs_path: str, file_name: str) -> GlyphMCPResponse[list[
     3. Return all files that the specified file references
     
     Args:
-        abs_path: The absolute path of the project's root where the .assistant folder is located.
+        abs_path: The absolute path of the project's root where the .assistant folder is located. Absolute path is required.
         file_name: The name of the file to find references from.
     
     Returns:
@@ -353,7 +353,7 @@ def find_references_to(abs_path: str, file_name: str) -> GlyphMCPResponse[list[s
     3. Return all files that reference the specified file
     
     Args:
-        abs_path: The absolute path of the project's root where the .assistant folder is located.
+        abs_path: The absolute path of the project's root where the .assistant folder is located. Absolute path is required.
         file_name: The name of the file to find references to.
     
     Returns:

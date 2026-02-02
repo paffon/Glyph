@@ -59,7 +59,7 @@ def add_design_log(abs_path: str, title: str, short_desc: str) -> GlyphMCPRespon
     Prerequisite: Read the design log rules.
     
     Args:
-        abs_path: The absolute path of the project's root where the .assistant folder is located.
+        abs_path: The absolute path of the project's root where the .assistant folder is located. Absolute path is required.
         title: The title for the design log. The file will be named dl_{number}_{title}.md
         short_desc: A short description for the design log. Will be used in the summary.
     

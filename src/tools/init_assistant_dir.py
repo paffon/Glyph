@@ -36,7 +36,7 @@ def is_initialized(path: str) -> bool:
     return os.path.exists(assistant_dir)
 
 @mcp.tool()
-def init_assistant_dir(root_path: str, overwrite: bool) -> GlyphMCPResponse:
+def init_assistant_dir(abs_path: str, overwrite: bool) -> GlyphMCPResponse:
     """
     User may refer to this tool as `glyph init`.
     Initialize the assistant directory at the given path. Recommended to use at the root of the project.
@@ -44,7 +44,7 @@ def init_assistant_dir(root_path: str, overwrite: bool) -> GlyphMCPResponse:
     If the directory already exists, please confirm with the user before overwriting.
     
     Args:
-        root_path: str, Path to the assistant directory. Recommended to use at the root of the project.
+        abs_path: str, Path to the assistant directory. Recommended to use at the root of the project. Absolute path is required.
         overwrite: bool, Whether to overwrite the existing directory if it exists. Must only be True if the user has explicitly confirmed or asked for it.
     
     Returns:
@@ -53,18 +53,18 @@ def init_assistant_dir(root_path: str, overwrite: bool) -> GlyphMCPResponse:
 
     response = GlyphMCPResponse[None]()
     
-    if not validate_absolute_path(root_path, response):
+    if not validate_absolute_path(abs_path, response):
         return response
 
-    if is_initialized(root_path):
+    if is_initialized(abs_path):
         if overwrite:
             # Backup
-            existing_dir_name = os.path.join(root_path, BASE_NAME)
-            backup_dir_name = os.path.join(root_path, f"{BASE_NAME}_backup_{int(os.path.getmtime(existing_dir_name))}")
+            existing_dir_name = os.path.join(abs_path, BASE_NAME)
+            backup_dir_name = os.path.join(abs_path, f"{BASE_NAME}_backup_{int(os.path.getmtime(existing_dir_name))}")
             os.rename(existing_dir_name, backup_dir_name)
             response.add_context(f"Existing assistant directory backed up to {backup_dir_name}.")
         else:
-            response.add_context(f"Assistant directory already exists at {os.path.join(root_path, BASE_NAME)}. Set overwrite=True to overwrite. Ask the user 'Looks like Glyph already initialized the assistant directory here. Do you want to overwrite it? Yes/No'")
+            response.add_context(f"Assistant directory already exists at {os.path.join(abs_path, BASE_NAME)}. Set overwrite=True to overwrite. Ask the user 'Looks like Glyph already initialized the assistant directory here. Do you want to overwrite it? Yes/No'")
             return response
 
     design_logs_summary_content = """# Design Logs summary
@@ -102,9 +102,9 @@ The main purpose of this file is to provide a quick overview of the design logs 
     ]
 
     try:
-        create_tree_recursive(root_path, {"contains": dir_structure})
+        create_tree_recursive(abs_path, {"contains": dir_structure})
         response.success = True
-        response.add_context(f"Assistant directory initialized at {os.path.join(root_path, BASE_NAME)}.")
+        response.add_context(f"Assistant directory initialized at {os.path.join(abs_path, BASE_NAME)}.")
 
     except Exception as e:
         response.add_context(f"Failed to initialize assistant directory: {str(e)}")

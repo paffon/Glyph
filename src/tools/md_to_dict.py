@@ -80,7 +80,7 @@ def md_to_dict(file_path: str) -> GlyphMCPResponse[Dict[str, Any]]:
     Parses a Markdown file into a hierarchical dictionary structure.
     
     Args:
-        file_path: Path to the .md file.
+        file_path: Path to the .md file. Absolute path is required.
         
     Returns:
         A hierarchical dictionary where each section contains:
