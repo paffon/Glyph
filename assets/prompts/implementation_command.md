@@ -1,4 +1,4 @@
-{plan_or_implement} Phase {phase_number} / Task {task_number} from "file_name_or_hyperlink".
+Implement Phase {phase_number} / Task {task_number} from "file_name_or_hyperlink".
 
 **Context/background:**
 
@@ -6,17 +6,17 @@
 - Read previous tasks/phases bottom lines / lessons learned, if any.
 - provide_specific_context_or_background_here
 
-**Before starting**:
+**Before starting:**
 
-1. Check if something you're about to implement already exists and can be re-used or slightly adapted. If so, this might even mean you need to adapt the Phase/Task Operation document. Let me know and hold on with the rest of the planning.
+1. Check if something you're about to implement already exists and can be re-used or slightly adapted. If so, this might even mean you need to adapt the Phase/Task Operation document. Let me know and hold on with the rest of the implementation.
 2. Remember SOLID, DRY and KISS. Do not overengineer. If task is complex, tell me how you're going to adhere to these principles. If the task is simple, no need.
-3. Your plan must include a risk assessment section mentioning possible risks and how to mitigate them, if any.
-4. If you find any ambiguities, inconsistencies, or missing information in the task description, ask me for clarification before proceeding.
+3. If you find any ambiguities, inconsistencies, or missing information in the task description, ask me for clarification before proceeding.
 
-**How to start:**
+**How to implement:**
 
-1. If this is a code change plan, you must start by trying to build and running all tests to get a benchmark against which you'll compare at the end of the implementation. If this isn't a code change plan, no need to run and test, unless specifically required by the task.
-2. Read the task description carefully, determine which other documents that I haven't mentioned might also be relevant, and read them. You may use Glyph tools to help you find relevant documents if needed.
+1. Read the task description carefully, determine which other documents that I haven't mentioned might also be relevant, and read them. You may use Glyph tools to help you find relevant documents if needed.
+2. Build and run all tests to establish a benchmark (if applicable).
+3. Ask the user if they have any reservations, questions, or clarifications they'd like addressed before proceeding.
 
 **When done:**
 

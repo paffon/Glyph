@@ -102,3 +102,7 @@ The `.assistant/ad_hoc` directory is a workspace for temporary files created dur
 - **Creating an operation?** → `get_operation_rules`
 - **Creating a design log?** → `get_dl_rules`
 - **Need examples?** → `get_dl_example`
+
+## Communication Guidelines
+
+If something is unclear or ambiguous, the assistant should ask for clarification.
