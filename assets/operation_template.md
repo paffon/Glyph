@@ -8,6 +8,12 @@
 
 **Phases overview**: <Briefly describe each phase and its purpose. Add a directed acyclic graph (DAG) inside a mermaid chart snippet if necessary to illustrate dependencies between phases (each phase as a subgraph) and tasks (each task as a node in the subgraphs)>
 
+Example:
+
+- Phase 1 (3 tasks): Description of phase 1.
+- Phase 2 (2 tasks): Description of phase 2.
+- etc.
+
 ### Phase 1: <Phase_Title>
 
 <Background information about Phase 1: Describe the issue, current state, and desired outcome.>
