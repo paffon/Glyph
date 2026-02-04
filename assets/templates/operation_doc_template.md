@@ -4,13 +4,9 @@
 
 <Provide background information about the operation.>
 
-### Lessons Learned during Operation
-
-<Dynamic Section: Record lessons learned during the operation that impact the overall operation. Leave empty if none.>
-
 ## Phases
 
-**Phases overview**: <Briefly describe each phase and its purpose. Add a directed acyclic graph (DAG) inside a mermaid chart snippet if necessary to illustrate dependencies between phases (each phase as a subgraph) and tasks (each task as a node in the subgraphs)>
+**Phases overview**: <Briefly describe each phase, how many tasks it includes, and its purpose. Add a directed acyclic graph (DAG) inside a mermaid chart snippet if necessary to illustrate dependencies between phases (each phase as a subgraph) and tasks (each task as a node in the subgraphs)>
 
 ### Phase 1: <Phase Title>
 
@@ -38,8 +34,12 @@
 - [ ] <Subtask 2>
 
 **P1/Task 1 Lessons Learned:**
-<Briefly write here what you learned or important considerations. Be concise!>
+<Briefly write here what you learned or important considerations. Be concise! If nothing to add, remove this section.>
 
 ### Phase 2: <Phase Title>
 
-<Repeat structure for additional phases.>
+etc.
+
+## Lessons Learned during Operation
+
+<Write here lessons learned from the entire operation. Be concise!>

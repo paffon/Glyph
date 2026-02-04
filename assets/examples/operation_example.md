@@ -26,11 +26,6 @@ Client-initiated export with server-side streaming:
 
 - [Design Log: Add Export to CSV Feature](.assistant/design_logs/dl_003_export_csv.md)
 
-### Lessons Learned during Operation
-
-- Streaming approach proved essential for large datasets; initial batch approach caused memory issues
-- Progress indicator threshold lowered from 10k to 5k rows based on user feedback during testing
-
 ### Current System Architecture
 
 The application uses a standard web architecture with React frontend and Node.js backend. Data tables are rendered client-side with pagination and filtering.
@@ -106,9 +101,9 @@ mindmap
 
 **Phases overview**:
 
-- Phase 1: Backend CSV Export - Create the API endpoint and CSV formatting utilities
-- Phase 2: Frontend Integration - Add UI components and handle API communication
-- Phase 3: Testing & Polish - Comprehensive testing and final adjustments
+- Phase 1 (3 tasks): Backend CSV Export - Create the API endpoint and CSV formatting utilities
+- Phase 2 (2 tasks): Frontend Integration - Add UI components and handle API communication
+- Phase 3 (1 task): Testing & Polish - Comprehensive testing and final adjustments
 
 ```mermaid
 graph TD
@@ -278,3 +273,8 @@ Create end-to-end tests for the export feature.
 **P3/Task 1 Lessons Learned**:
 
 -
+
+## Lessons Learned during Operation
+
+- Streaming approach proved essential for large datasets; initial batch approach caused memory issues
+- Progress indicator threshold lowered from 10k to 5k rows based on user feedback during testing
