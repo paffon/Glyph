@@ -1,8 +1,8 @@
-Perform a code review of operation: {operation_name}. You may use Glyph's static code analysis tool to get some data about given files.
+Perform a code review of operation: #{operation_name} . You may use Glyph's static code analysis tool to get some data about given files.
 
-Additional References: {design_log_name}
+Additional References: #{design_log_name}
 
-**Review Checklist:**
+**Review Checklist**:
 
 1. **Functionality**
    - Do all implemented features match the requirements?
@@ -31,7 +31,7 @@ Additional References: {design_log_name}
    - Are there security vulnerabilities?
    - Is input validation present?
 
-**Output:**
+**Output**:
 
 Generate a code review report following the example template. Include:
 
@@ -41,7 +41,9 @@ Generate a code review report following the example template. Include:
 - Recommendations categorized by priority (Must Fix, Should Fix, Nice to Have)
 - Lessons learned that should propagate back to the design log- and haven't been documented yet
 
-**After review:**
+**Save to** `.assist/ad_hoc`
+
+**After review**:
 
 1. Create action items for any issues found
 2. If lessons learned are significant, suggest updating the design log
