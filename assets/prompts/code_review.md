@@ -1,20 +1,6 @@
 Perform a code review of operation: {operation_name}. You may use Glyph's static code analysis tool to get some data about given files.
 
-**References:**
-
-- Operation Document: {operation_doc_path}
-- Design Log (if applicable): {design_log_path}
-
-**Before starting:**
-
-1. Read the operation document thoroughly
-2. Read the related design log if provided
-3. Understand the original requirements and constraints
-
-**Review Scope:**
-
-{review_scope}
-<!-- Options: full (all phases), specific phases/tasks, or changes since last review -->
+Additional References: {design_log_name}
 
 **Review Checklist:**
 
@@ -28,6 +14,7 @@ Perform a code review of operation: {operation_name}. You may use Glyph's static
    - Does it follow project conventions and patterns?
    - Is there appropriate error handling?
    - Are SOLID, DRY, and KISS principles followed?
+   - You may use Glyph's static code analysis tool to get some data about code quality.
 
 3. **Test Coverage**
    - Are there sufficient unit tests?
@@ -52,10 +39,9 @@ Generate a code review report following the example template. Include:
 - Detailed findings for each review category
 - Specific code issues with locations and suggestions
 - Recommendations categorized by priority (Must Fix, Should Fix, Nice to Have)
-- Lessons learned that should propagate back to the design log
+- Lessons learned that should propagate back to the design log- and haven't been documented yet
 
 **After review:**
 
-1. Discuss findings with the user
-2. Create action items for any issues found
-3. If lessons learned are significant, suggest updating the design log
+1. Create action items for any issues found
+2. If lessons learned are significant, suggest updating the design log

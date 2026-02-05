@@ -94,20 +94,15 @@ def implementation_prompt(phase_number: int, task_number: int) -> str:
 
 @mcp.prompt()
 def code_review_prompt(
-    operation_name: str,
-    operation_doc_path: str,
-    design_log_path: str = "",
-    review_scope: Literal["full", "specific", "changes"] = "full"
+    operation_name: str = "No operation name provided",
+    design_log_name: str = "No design log provided"
 ) -> str:
-    # TODO: Change this whole thing
     """
     Trigger a code review of an operation.
 
     Args:
-        operation_name: Name of the operation being reviewed
-        operation_doc_path: Path to the operation document
-        design_log_path: Path to the related design log (optional)
-        review_scope: Scope - "full", "specific" phases/tasks, or "changes"
+        operation_name: (Optional) Name of the operation being reviewed
+        design_log_name: (Optional) Name of the related design log
 
     Returns:
         The code review prompt.
@@ -115,9 +110,7 @@ def code_review_prompt(
     template = read_asset("code_review.md")
     return template.format(
         operation_name=operation_name,
-        operation_doc_path=operation_doc_path,
-        design_log_path=design_log_path or "Not provided",
-        review_scope=review_scope
+        design_log_name=design_log_name
     )
 
 
