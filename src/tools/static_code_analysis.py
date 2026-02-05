@@ -399,7 +399,7 @@ def format_analysis_markdown(all_metrics: List[Dict[str, Any]]) -> str:
 @mcp.tool()
 def static_code_analysis(
     file_paths: List[str],
-    output_path: Optional[str] = None
+    save_to_ad_hoc: bool = False
 ) -> GlyphMCPResponse[Dict[str, Any]]:
     """
     Perform static code analysis on source code files.
@@ -416,13 +416,13 @@ def static_code_analysis(
     Args:
         file_paths: List of absolute paths to source files to analyze.
                    Supported extensions: .py (Python), .cs (C#)
-        output_path: Optional absolute path to save the analysis as a markdown file.
-                    If not provided, returns the analysis as structured data.
+        save_to_ad_hoc: If True, saves the analysis as a markdown file to .assistant/ad_hoc directory.
+                       If False, returns the analysis as structured data.
     
     Returns:
         GlyphMCPResponse containing the analysis results.
-        - If output_path is provided: confirms the file was written
-        - If output_path is not provided: returns the full analysis data
+        - If save_to_ad_hoc is True: confirms the file was written
+        - If save_to_ad_hoc is False: returns the full analysis data
     """
     response = GlyphMCPResponse[Dict[str, Any]]()
     
@@ -434,10 +434,6 @@ def static_code_analysis(
     for path in file_paths:
         if not validate_absolute_path(path, response):
             return response
-    
-    # Validate output path if provided
-    if output_path and not validate_absolute_path(output_path, response):
-        return response
     
     supported_extensions = get_supported_extensions()
     response.add_context(f"Supported file types: {', '.join(supported_extensions)}")
@@ -465,15 +461,40 @@ def static_code_analysis(
     # Convert to dict for output
     metrics_dicts = [m.to_dict() for m in all_metrics]
     
-    if output_path:
-        # Generate markdown and save to file
+    if save_to_ad_hoc:
+        # Generate markdown and save to .assistant/ad_hoc directory
         markdown_content = format_analysis_markdown(metrics_dicts)
         
         try:
-            # Create directory if it doesn't exist
-            output_dir = os.path.dirname(output_path)
-            if output_dir:
-                os.makedirs(output_dir, exist_ok=True)
+            # Find .assistant directory by looking up from the first file's directory
+            first_file = file_paths[0]
+            current_dir = os.path.dirname(os.path.abspath(first_file))
+            
+            # Search for .assistant directory
+            assistant_dir = None
+            while current_dir:
+                potential_assistant = os.path.join(current_dir, '.assistant')
+                if os.path.isdir(potential_assistant):
+                    assistant_dir = potential_assistant
+                    break
+                parent = os.path.dirname(current_dir)
+                if parent == current_dir:  # reached root
+                    break
+                current_dir = parent
+            
+            if not assistant_dir:
+                response.add_context("Could not find .assistant directory in parent directories.")
+                return response
+            
+            # Create ad_hoc directory if it doesn't exist
+            ad_hoc_dir = os.path.join(assistant_dir, 'ad_hoc')
+            os.makedirs(ad_hoc_dir, exist_ok=True)
+            
+            # Generate filename with timestamp
+            from datetime import datetime
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"code_analysis_{timestamp}.md"
+            output_path = os.path.join(ad_hoc_dir, filename)
             
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(markdown_content)
