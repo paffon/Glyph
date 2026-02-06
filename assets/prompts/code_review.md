@@ -56,7 +56,7 @@ Generate a code review report (Saved to `.assist/ad_hoc`) following the example 
   - **Optional**: Nice to have (minor refactoring, style improvements, optimizations)
 - Lessons learned that should propagate back to the design log- and haven't been documented yet
 
-## *After review
+## After review
 
 1. Create action items for any issues found
 2. If lessons learned are significant, suggest updating the design log
