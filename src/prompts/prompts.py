@@ -3,12 +3,12 @@ Consolidated prompts module.
 
 All Glyph prompts (slash commands) in one place.
 """
-from typing import Dict, List, Literal
+from typing import Any, Dict, List, Literal
 from mcp_object import mcp
 from read_an_asset import read_asset
 
 
-def replace_in_prompts(prompt: str, replacements_dict: Dict[str, str]) -> str:
+def replace_in_prompts(prompt: str, replacements_dict: Dict[str, Any]) -> str:
     """
     Replace placeholders in a prompt string based on a replacements dictionary.
 
@@ -23,7 +23,7 @@ def replace_in_prompts(prompt: str, replacements_dict: Dict[str, str]) -> str:
 
     for k, v in replacements_dict.items():
         this = "{{" + k + "}}"
-        that = v
+        that = str(v)
 
         if this not in prompt:
             warnings.append(f"Placeholder {this} not found in prompt.")
@@ -37,7 +37,14 @@ def replace_in_prompts(prompt: str, replacements_dict: Dict[str, str]) -> str:
     return prompt
 
 
-def _format_task_display(task_number: str | int) -> str:
+def _normalize_number(value: int | float | str) -> str:
+    """Convert numeric value to clean string (float 1.0 → int 1 → str '1')."""
+    if isinstance(value, float) and value.is_integer():
+        return str(int(value))
+    return str(value)
+
+
+def _format_task_display(task_number: str | int | float) -> str:
     """
     Convert task_number to grammatically correct display format.
     
@@ -48,12 +55,7 @@ def _format_task_display(task_number: str | int) -> str:
         - "1, 2, 5" → "Tasks 1, 2, 5"
         - "all" → "all tasks"
     """
-
-    # If is float, convert to int (e.g., 1.0 → 1)
-    if isinstance(task_number, float) and task_number.is_integer():
-        task_number = int(task_number)
-
-    task_str = str(task_number)
+    task_str = _normalize_number(task_number)
     
     if task_str == "all":
         return "all tasks"
@@ -66,8 +68,8 @@ def _format_task_display(task_number: str | int) -> str:
 
 def _load_phase_prompt(
     asset_filename: str,
-    phase_number: int,
-    task_number: str | int,
+    phase_number: int | float,
+    task_number: str | int | float,
     operation_document: str,
     additional_context: str = "Nothing specific, but feel free to read more files"
 ) -> str:
@@ -87,13 +89,15 @@ def _load_phase_prompt(
     Raises:
         ValueError: If phase_number < 1
     """
-    if phase_number < 1:
-        raise ValueError(f"phase_number must be >= 1, got {phase_number}")
+    # Normalize and validate phase number
+    phase_int = int(phase_number) if isinstance(phase_number, float) and phase_number.is_integer() else phase_number
+    if isinstance(phase_int, int) and phase_int < 1:
+        raise ValueError(f"phase_number must be >= 1, got {phase_int}")
     
     template = read_asset(asset_filename)
     task_display = _format_task_display(task_number)
     return replace_in_prompts(template, {
-        "phase_number": str(phase_number),
+        "phase_number": _normalize_number(phase_number),
         "task_display": task_display,
         "operation_document": operation_document,
         "additional_context": additional_context
@@ -131,7 +135,7 @@ def create_design_log_prompt(
 
 @mcp.prompt()
 def create_operation_doc_prompt(
-    step_to_create_doc_for: float,
+    step_to_create_doc_for: int | float,
     design_log_name: str
 ) -> str:
     """
@@ -146,7 +150,7 @@ def create_operation_doc_prompt(
     """
     template = read_asset("create_an_operation_doc.md")
     return replace_in_prompts(template, {
-        "step_to_create_doc_for": str(step_to_create_doc_for),
+        "step_to_create_doc_for": _normalize_number(step_to_create_doc_for),
         "design_log_name": design_log_name
     })
 
@@ -157,8 +161,8 @@ def create_operation_doc_prompt(
 
 @mcp.prompt()
 def planning_prompt(
-    phase_number: int,
-    task_number: str | int = "all",
+    phase_number: int | float,
+    task_number: str | int | float = "all",
     operation_document: str = "Operation Document",
     additional_context: str = "Nothing specific, but feel free to read more files"
 ) -> str:
@@ -189,8 +193,8 @@ def planning_prompt(
 
 @mcp.prompt()
 def implementation_prompt(
-    phase_number: int,
-    task_number: str | int = "all",
+    phase_number: int | float,
+    task_number: str | int | float = "all",
     operation_document: str = "Operation Document",
     additional_context: str = "Nothing specific, but feel free to read more files"
 ) -> str:
