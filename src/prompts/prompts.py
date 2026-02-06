@@ -135,14 +135,14 @@ def create_design_log_prompt(
 
 @mcp.prompt()
 def create_operation_doc_prompt(
-    step_to_create_doc_for: int | float,
+    step_to_create_doc_for: int | float | str,
     design_log_name: str
 ) -> str:
     """
     Trigger the creation of an operation document from a design log step.
 
     Args:
-        step_to_create_doc_for: The step number to create the operation document for
+        step_to_create_doc_for: The step number or identifier to create the operation document for
         design_log_name: Name or path of the design log (default: "Design Log")
 
     Returns:
