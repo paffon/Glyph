@@ -1,13 +1,13 @@
 ---
 In this prompt:
 
-{step_to_create_doc_for} = {{step_to_create_doc_for}}
-{design_log_name} = {{design_log_name}}
+<step_to_create_doc_for> = {{step_to_create_doc_for}}
+<design_log_name> = {{design_log_name}}
 ---
 
 # Your mission
 
-Plan the creation of a new operation document for step {{step_to_create_doc_for}} from {{design_log_name}}.
+Plan the creation of a new operation document for step <step_to_create_doc_for> from <design_log_name>.
 
 ## Instructions
 

@@ -1,13 +1,13 @@
 ---
 In this prompt:
 
-{operations_list} = {{operations_list}}
-{design_logs_list} = {{design_logs_list}}
+<operations_list> = {{operations_list}}
+<design_logs_list> = {{design_logs_list}}
 ---
 
 # Your mission
 
-Sync lessons learned from {{operations_list}} back to {{design_logs_list}}.
+Sync lessons learned from <operations_list> back to <design_logs_list>.
 
 ## Process
 
@@ -40,11 +40,11 @@ Sync lessons learned from {{operations_list}} back to {{design_logs_list}}.
 For each operation processed, report:
 
 ```txt
-Operation: {operation_name}
-Related Design Log: {design_log_name}
-Lessons synced: {count}
-- [General] {lesson_summary}
-- [Step X] {lesson_summary}
+Operation: <operation_name>
+Related Design Log: <design_log_name>
+Lessons synced: <count>
+- [General] <lesson_summary>
+- [Step X] <lesson_summary>
 ...
 ```
 
