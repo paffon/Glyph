@@ -135,6 +135,7 @@ def add_document(
             f.write(template_content)
         
         response.add_context(f"Created new {doc_type}: {new_filename}")
+        response.add_context(f"It's advised to edit other documents you might want to reference this new doc, and vice versa, to ensure proper linking and context.")
         response.success = True
         
     except Exception as e:
