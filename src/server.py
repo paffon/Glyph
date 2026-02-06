@@ -19,7 +19,7 @@ if __name__ == "__main__":
             get_principles,
             get_example,
             read_asset_exact,
-            mermaid_whisperer
+            
         )
 
         # Tools (action tools)

@@ -49,6 +49,8 @@ However, this is not a strict requirement. If you create a design log without an
 | Get Glyph overview | `get_glyph_overview` |
 | Get principles | `get_principles(topic)` |
 | Get examples | `get_example(type)` |
+| Read asset file | `read_asset_exact(relative_path)` |
+| Mermaid chart examples | `mermaid_whisperer()` |
 
 ## Working with the Ad Hoc Directory
 
