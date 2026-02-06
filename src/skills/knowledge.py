@@ -147,3 +147,14 @@ def read_asset_exact(relative_path: str) -> GlyphMCPResponse[str]:
         response.result = content
     
     return response
+
+
+@mcp.tool()
+def mermaid_whisperer() -> GlyphMCPResponse[str]:
+    """
+    Retrieve examples of how different mermaid charts look and what uses they have.
+
+    Returns:
+        GlyphMCPResponse containing the complete mermaid chart examples.
+    """
+    return _read_asset_with_response("examples/mermaid_chart_types.md")
