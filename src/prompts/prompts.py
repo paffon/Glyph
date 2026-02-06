@@ -48,6 +48,11 @@ def _format_task_display(task_number: str | int) -> str:
         - "1, 2, 5" → "Tasks 1, 2, 5"
         - "all" → "all tasks"
     """
+
+    # If is float, convert to int (e.g., 1.0 → 1)
+    if isinstance(task_number, float) and task_number.is_integer():
+        task_number = int(task_number)
+
     task_str = str(task_number)
     
     if task_str == "all":
