@@ -1,9 +1,7 @@
----
 In this prompt:
 
 <step_to_create_doc_for> = {{step_to_create_doc_for}}
 <design_log_name> = {{design_log_name}}
----
 
 # Your mission
 

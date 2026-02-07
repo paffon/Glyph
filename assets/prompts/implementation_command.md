@@ -1,11 +1,9 @@
----
 In this prompt:
 
 <phase_number> = {{phase_number}}
 <task_display> = {{task_display}}
 <operation_document> = {{operation_document}}
 <additional_context> = {{additional_context}}
----
 
 # Your mission
 

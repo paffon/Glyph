@@ -1,10 +1,8 @@
----
 In this prompt:
 
 <operation_name> = {{operation_name}}
 <design_log_name> = {{design_log_name}}
 <additional_context> = {{additional_context}}
----
 
 # Your mission
 

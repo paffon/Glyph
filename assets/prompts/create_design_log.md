@@ -1,10 +1,8 @@
----
 In this prompt:
 
 <topic> = {{topic}}
 <design_log_type> = {{design_log_type}}
 <additional_context> = {{additional_context}}
----
 
 # Your mission
 

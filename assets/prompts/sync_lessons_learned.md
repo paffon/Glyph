@@ -1,20 +1,18 @@
----
 In this prompt:
 
 <operations_list> = {{operations_list}}
 <design_logs_list> = {{design_logs_list}}
----
 
 # Your mission
 
-Sync lessons learned from <operations_list> back to <design_logs_list>.
+Sync the absolutely crucial, critical, and most important lessons learned from <operations_list> back to <design_logs_list>. Avoid duplicating lessons already present or reasonably assumed in the design logs.
 
 ## Process
 
 1. **For each operation document:**
    - Read the operation document completely
-   - Extract all "Lessons Learned" sections from tasks and phases
-   - Extract the "Lessons Learned during Operation" section
+   - Extract only the most critical "Lessons Learned" sections from tasks and phases
+   - Extract the most critical "Lessons Learned during Operation" section
    - Identify the related design logs from the References section
 
 2. **Categorize lessons:**
@@ -33,11 +31,11 @@ Sync lessons learned from <operations_list> back to <design_logs_list>.
    - Add lessons concisely (minimal but clear)
    - Preserve existing content
    - Use clear attribution: "From [op_xxx]: lesson text"
-   - Avoid duplicating lessons already present
+   - Avoid duplicating lessons already present or reasonably assumed
 
 ## Output format
 
-For each operation processed, report:
+For each operation processed, report back to me in the chat:
 
 ```txt
 Operation: <operation_name>
@@ -45,7 +43,7 @@ Related Design Log: <design_log_name>
 Lessons synced: <count>
 - [General] <lesson_summary>
 - [Step X] <lesson_summary>
-...
+...etc
 ```
 
 ## After syncing

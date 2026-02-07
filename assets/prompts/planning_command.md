@@ -1,4 +1,3 @@
----
 In this prompt:
 
 <phase_number> = {{phase_number}}
