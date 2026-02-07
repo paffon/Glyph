@@ -24,7 +24,6 @@ if __name__ == "__main__":
 
         # Tools (action tools)
         from tools.init_assistant_dir import init_assistant_dir
-        from tools.md_to_dict import md_to_dict
         from tools.add_design_log import add_design_log
         from tools.add_operation import add_operation
         from tools.persist_artifact import persist_artifacts
